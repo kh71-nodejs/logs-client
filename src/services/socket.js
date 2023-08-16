@@ -13,9 +13,8 @@ const socket = socketClient(process.env?.SocketDomain || `${PROTOCOL}://${SS}:${
     from: process.env.ServerName || "express",
   },
 });
-socket.on("connection", function (socket) {
-  socket.on("chat message", function (msg) {
-  });
+socket.on("connect_error", function (err) {
+  console.log(err.message);
 });
 
 ee.on('event', function (text) {
