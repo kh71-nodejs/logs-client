@@ -1,6 +1,6 @@
 {
   "name": "logs-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Logs-client collect data log push to Server",
   "main": "src/index.js",
   "repository": {
