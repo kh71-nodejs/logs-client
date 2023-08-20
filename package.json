@@ -1,17 +1,28 @@
 {
-  "name": "log-client",
-  "version": "1.0.0",
-  "description": "",
+  "name": "logs-client",
+  "version": "0.0.1",
+  "description": "Logs-client collect data log push to Server",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kh71-nodejs/logs-client"
+  },
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "ServerName": "Test",
+    "SecretToken": "64e17cb10155b269c82157a3",
+    "SocketProtocol": "wss",
+    "SocketServer": "portal.kh71.com",
+    "SocketPort": ""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "events": "^3.3.0",
+    "pmx": "^1.6.7",
     "socket.io-client": "^4.7.2",
     "tail": "^2.2.6"
   }
