@@ -1,7 +1,4 @@
 const Tail = require('tail').Tail;
-const EventEmitter = require("events");
-
-const ee = new EventEmitter();
 
 function tailFile(ee, path) {
   console.log(path);
