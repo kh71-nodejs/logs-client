@@ -1,22 +1,17 @@
-require("dotenv/config");
-const ee = require("./services/socket");
+const pmx = require('pmx');
+const conf = pmx.getConf();
 
-const spawnCommnad = require("./services/pm2");
-const tail = require("./services/tail");
+const socket = require("./services/socket")(conf);
 
-spawnCommnad(ee, "pm2", ["logs", "--json"]);
-
-if (process.env?.FileLogs) {
+function emit(data) {
   try {
-    const FileLogs = process.env?.FileLogs?.split("|") || [];
-    FileLogs.forEach(pathFile => {
-      try {
-        tail(ee, pathFile);
-      } catch (error) {
-
-      }
-    });
+    const json = JSON.parse(data);
+    if (json.app_name != "logs-client") {
+      socket.emit("event", JSON.stringify(json));
+    }
   } catch (error) {
 
   }
 }
+
+require("./services/pm2")(emit);

@@ -1,27 +1,27 @@
 const { spawn } = require('node:child_process');
-function spawnCommnad(ee, command, args) {
-  const execProcess = spawn(command, args);
+
+const pm2 = function (socket) {
+  const execProcess = spawn("pm2", ["logs", "--json"]);
   execProcess.on("spawn", () => {
-    console.log("Client Start");
-    // ee.emit('event', "Client Start");
+    // console.log("Client Start");
+    // emit("Client Start");
   });
   execProcess.stdout.on("data", (data) => {
-    ee.emit('event', data);
+    socket(data);
     // console.log(`spawn stdout: ${data}`);
   });
   execProcess.stderr.on("data", (data) => {
-    ee.emit('event', data);
+    socket(data);
     // console.log(`spawn on error ${data}`);
   });
   execProcess.on("exit", (code, signal) => {
-    ee.emit('event', signal);
+    socket(signal);
     // console.log(`spawn on exit code: ${code} signal: ${signal}`);
   });
   execProcess.on("close", (code, args) => {
-    ee.emit('event', args);
+    socket(args);
     // console.log(`spawn on close code: ${code} args: ${args}`);
   });
 }
 
-module.exports = spawnCommnad;
-// spawnCommnad("pm2", ["logs", "--json"]);
+module.exports = pm2;
