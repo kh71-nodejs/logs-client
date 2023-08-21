@@ -1,6 +1,6 @@
 {
   "name": "logs-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Logs-client collect data log push to Server",
   "main": "src/index.js",
   "repository": {
@@ -16,14 +16,23 @@
     "SecretToken": "64e17cb10155b269c82157a3",
     "SocketProtocol": "wss",
     "SocketServer": "portal.kh71.com",
-    "SocketPort": ""
+    "SocketPort": "",
+    "refreshMonit": 60
   },
+  "apps": [
+    {
+      "merge_logs": true,
+      "max_memory_restart": "200M",
+      "script": "src/index.js"
+    }
+  ],
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Kaing Dara",
+  "license": "MIT",
   "dependencies": {
     "pmx": "^1.6.7",
     "socket.io-client": "^4.7.2",
+    "sqlite3": "^5.1.6",
     "tail": "^2.2.6"
   }
 }

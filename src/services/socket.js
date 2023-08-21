@@ -13,8 +13,8 @@ const Socket = (conf) => {
     },
   });
 
-  socket.on("connect_error", function (err) {
-    console.log(err.message);
+  socket.on("reconnect", (socket) => {
+    connection = true;
   });
 
   return socket;
