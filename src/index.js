@@ -31,8 +31,9 @@ function emit(data, key = "pm2") {
       } else {
         switch (key) {
           case "pm2":
-            console.log(json.app_name);
             _PM2Model.create(json);
+            break;
+          case "nginx":
             break;
           default:
             break;

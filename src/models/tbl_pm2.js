@@ -42,15 +42,19 @@ PM2Model.prototype.create = function (json) {
   }
 }
 
+PM2Model.prototype.reset = function () {
+  // db.run("UPDATE `sqlite_sequence` SET`seq` = 0 WHERE`name` = 'pm2'");
+}
+
 PM2Model.prototype.resubmit = function () {
   this.db.get("SELECT * FROM pm2 WHERE emit=0", [], (err, row) => {
-    if (row)
-      this.db.run(`UPDATE pm2 SET emit=1 WHERE id=${row.id}`, [], (err) => {
+    if (row) {
+      this.db.run("DELETE FROM pm2 WHERE id=(?)", row.id, (err) => {
         if (!err)
           this.socket.emit("pm2", row);
       });
+    }
   });
 }
-
 
 module.exports = PM2Model;
